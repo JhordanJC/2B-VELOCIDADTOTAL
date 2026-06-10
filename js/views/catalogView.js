@@ -1,3 +1,5 @@
+import { observer } from "../patterns/EventObserver.js";
+import { store } from "../patterns/StoreSingleton.js";
 import { bubbleSortByPrice } from "../algorithms/sort.js";
 import { linearSearchCars } from "../algorithms/search.js";
 import { CarService } from "../services/CarService.js";
@@ -34,16 +36,45 @@ export async function initCatalogView() {
 
     try {
         cars = await CarService.getCars();
-        renderCars(cars);
 
-        searchInput.addEventListener("input", function(){
-            const filteredCars = linearSearchCars(cars, searchInput.value);
-            renderCars(filteredCars);
-            });
-        sortButton.addEventListener("click", function (){
-            const orderedCars = bubbleSortByPrice(cars);
-            renderCars(orderedCars);
-            });
+        const savedState = store.getState();
+        searchInput.value = savedState.searchText;
+
+        let currentCars = cars;
+
+        if (savedState.searchText) {
+            currentCars = linearSearchCars(currentCars, savedState.searchText);
+        }
+
+        if (savedState.sortBy === "price") {
+            currentCars = bubbleSortByPrice(currentCars);
+        }
+
+        renderCars(currentCars);
+
+        searchInput.addEventListener("input", function () {
+        store.setSearchText(searchInput.value);
+        observer.notify("searchChanged", searchInput.value);
+
+        const filteredCars = linearSearchCars(cars, searchInput.value);
+        renderCars(filteredCars);
+        });
+
+        sortButton.addEventListener("click", function () {
+        store.setSortBy("price");
+        observer.notify("sortChanged", "price");
+
+        const orderedCars = bubbleSortByPrice(cars);
+        renderCars(orderedCars);
+        });
+
+        observer.subscribe("searchChanged", function (text) {
+        console.log("Busqueda actualizada:", text);
+        });
+
+        observer.subscribe("sortChanged", function (sortBy) {
+        console.log("Orden aplicado:", sortBy);
+        });
 
     } catch (error) {
         container.innerHTML = "<p>Error al cargar los vehiculos</p>";
