@@ -1,3 +1,5 @@
+import { bubbleSortByPrice } from "../algorithms/sort.js";
+import { linearSearchCars } from "../algorithms/search.js";
 import { CarService } from "../services/CarService.js";
 let cars = []
 export function catalogView() {
@@ -35,22 +37,14 @@ export async function initCatalogView() {
         renderCars(cars);
 
         searchInput.addEventListener("input", function(){
-            const text = searchInput.value.toLowerCase();
-
-            const filteredCars = cars.filter(function (car) {
-                return (
-                    car.brand.toLowerCase().includes(text) ||
-                    car.model.toLowerCase().includes(text)
-                );
-            });
+            const filteredCars = linearSearchCars(cars, searchInput.value);
             renderCars(filteredCars);
-        });
-        sortButton.addEventListener("click", function (){
-            const orderedCars = [...cars].sort(function (a, b) {
-                return a.price - b.price;
             });
+        sortButton.addEventListener("click", function (){
+            const orderedCars = bubbleSortByPrice(cars);
             renderCars(orderedCars);
-        });
+            });
+
     } catch (error) {
         container.innerHTML = "<p>Error al cargar los vehiculos</p>";
     }
