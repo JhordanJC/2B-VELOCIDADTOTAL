@@ -12,7 +12,7 @@
 
     {
         "id": 2,
-        "brand": "Porshe",
+        "brand": "Porsche",
         "model": "911 Carrera S",
         "year": 2023,
         "price": 145900,
@@ -30,5 +30,36 @@
         "type": "Electrico",
         "fuel": "Electrico",
         "image": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        "id": 4,
+        "brand": "Mercedes-AMG",
+        "model": "GT 63 S",
+        "year": 2022,
+        "price": 158200,
+        "type": "Coupe",
+        "fuel": "Gasolina",
+        "image": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+        "id": 5,
+        "brand": "Maserati",
+        "model": "MC20 Cielo",
+        "year": 2024,
+        "price": 250000,
+        "type": "Convertible",
+        "fuel": "Gasolina",
+        "image": "https://images.unsplash.com/photo-1617814076668-1a56c957e74a?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+        "id": 6,
+        "brand": "Land Rover",
+        "model": "Range Rover Sport",
+        "year": 2024,
+        "price": 120000,
+        "type": "SUV",
+        "fuel": "Hibrido",
+        "image": "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=900&q=80"
     }
 ]
