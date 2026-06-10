@@ -22,6 +22,8 @@ export function catalogView() {
     </div>
     <p id="carCounter"></p>
 
+    <div id="detailPanel" class="detail-panel hidden"></div>
+
     <div id="carsContainer" class="cars-grid"></div>
     </section>
     `;
@@ -89,15 +91,84 @@ function renderCars(carList) {
     counter.textContent = `${carList.length} vehiculos disponibles`;
 
     container.innerHTML = carList.map(function(car) {
+        const stars = "&#9733;".repeat(car.rating) + "&#9734;".repeat(5 - car.rating);
+        const badgeClass = car.status === "Certificado" ? "car-badge certified" : "car-badge";
+
         return `
         <article class="car-card">
-        <img src="${car.image}" alt="${car.brand} ${car.model}">
-        <div class="car-card-body">
-        <h3>${car.brand} ${car.model}</h3>
-        <p>${car.type} - ${car.fuel}</p>
-        <strong>$${car.price.toLocaleString()}</strong>
-        </div>
+            <div class="car-image-box">
+                <img src="${car.image}" alt="${car.brand} ${car.model}">
+                <span class="${badgeClass}">${car.status}</span>
+                <button class="favorite-button" type="button">&#9825;</button>
+            </div>
+
+            <div class="car-card-body">
+                <h3>${car.brand} ${car.model}</h3>
+                <p class="car-year">Modelo ${car.year}</p>
+
+                <div class="rating-row">
+                    <span>${stars}</span>
+                    <p>(${car.reviews} resenas)</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div>
+                        <span>&#9889;</span>
+                        <small>POTENCIA</small>
+                        <p>${car.power}</p>
+                    </div>
+
+                    <div>
+                        <span>&#8599;</span>
+                        <small>MOTOR</small>
+                        <p>${car.engine}</p>
+                    </div>
+                </div>
+
+                <strong class="price">$${car.price.toLocaleString()}</strong>
+
+                <div class="card-actions">
+                    <button type="button" class="detail-button" data-id="${car.id}">Ver detalle</button>
+                </div>
+            </div>
         </article>
         `;
     }).join("");
+
+    const detailButtons = document.querySelectorAll(".detail-button");
+
+    detailButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            const carId = Number(button.dataset.id);
+            const selectedCar = cars.find(function(car) {
+                return car.id === carId;
+            });
+
+            showCarDetail(selectedCar);
+        });
+    });
+}
+
+function showCarDetail(car) {
+    const detailPanel = document.getElementById("detailPanel");
+
+    if (!car) {
+        return;
+    }
+
+    detailPanel.classList.remove("hidden");
+    detailPanel.innerHTML = `
+        <div>
+            <span class="detail-label">Detalle seleccionado</span>
+            <h3>${car.brand} ${car.model}</h3>
+            <p>${car.description}</p>
+        </div>
+
+        <ul>
+            <li><strong>Modelo:</strong> ${car.year}</li>
+            <li><strong>Tipo:</strong> ${car.type}</li>
+            <li><strong>Combustible:</strong> ${car.fuel}</li>
+            <li><strong>Precio:</strong> $${car.price.toLocaleString()}</li>
+        </ul>
+    `;
 }
