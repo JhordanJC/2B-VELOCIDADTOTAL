@@ -54,6 +54,7 @@ export function initLoginView() {
         };
 
         localStorage.setItem("userSession", JSON.stringify(user));
+        window.dispatchEvent(new Event("storage"));
 
         message.textContent = "Sesion iniciada correctamente.";
 

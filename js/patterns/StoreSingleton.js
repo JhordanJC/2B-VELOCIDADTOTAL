@@ -7,7 +7,7 @@ class StoreSingleton {
         }
         this.#state = {
             searchText: localStorage.getItem("searchText") || "",
-            sortBy: localStorage.getItem("sorBy") || "" 
+            sortBy: localStorage.getItem("sortBy") || "" 
         };
         StoreSingleton.instance = this;
     }
