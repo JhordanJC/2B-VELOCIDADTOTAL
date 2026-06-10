@@ -6,7 +6,7 @@ export function router(){
     const app = document.getElementById("app");
     const route = window.location.hash || "#home";
 
-    if (route === "home") {
+    if (route === "#home") {
         app.innerHTML = homeView();
     }
     
