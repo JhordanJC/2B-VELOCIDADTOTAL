@@ -1,6 +1,6 @@
 import {homeView} from "./views/homeView.js";
 import {catalogView, initCatalogView} from "./views/catalogView.js";
-import {loginView} from "./views/loginView.js";
+import {loginView, initLoginView} from "./views/loginView.js";
 
 export function router(){
     const app = document.getElementById("app");
@@ -17,5 +17,6 @@ export function router(){
 
     if (route === "#login") {
         app.innerHTML = loginView();
+        initLoginView();
     }
 }
