@@ -1,10 +1,10 @@
-import { CarService } from "../services/carService.js";
+import { CarService } from "../services/CarService.js";
 let cars = []
 export function catalogView() {
     return `
     <section class="catalog">
     <div class="catalog-header">
-    <h2>Catálogo de Autos</h2>
+    <h2>Catalogo de Autos</h2>
     <p>Explora vehiculos exclusivos</p>
     </div>
 
@@ -65,7 +65,7 @@ function renderCars(carList) {
 
     container.innerHTML = carList.map(function(car) {
         return `
-        <article class="card-card">
+        <article class="car-card">
         <img src="${car.image}" alt="${car.brand} ${car.model}">
         <div class="car-card-body">
         <h3>${car.brand} ${car.model}</h3>
