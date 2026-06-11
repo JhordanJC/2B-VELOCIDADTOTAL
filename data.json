@@ -7,7 +7,13 @@
         "price": 112500,
         "type": "Deportivo",
         "fuel": "Gasolina",
-        "image": "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80"
+        "image": "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80",
+        "status": "Nuevo",
+        "rating": 4,
+        "reviews": 24,
+        "power": "510 CV",
+        "engine": "3.0L S6",
+        "description": "Sedan deportivo de alto rendimiento con respuesta rapida, diseno agresivo y tecnologia pensada para una conduccion precisa."
     },
 
     {
@@ -18,7 +24,13 @@
         "price": 145900,
         "type": "Deportivo",
         "fuel": "Gasolina",
-        "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80"
+        "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80",
+        "status": "Certificado",
+        "rating": 5,
+        "reviews": 42,
+        "power": "450 CV",
+        "engine": "3.0L H6",
+        "description": "Icono deportivo con motor trasero, excelente equilibrio y una experiencia de manejo enfocada en velocidad, control y elegancia."
     },
 
     {
@@ -29,7 +41,13 @@
         "price": 139000,
         "type": "Electrico",
         "fuel": "Electrico",
-        "image": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+        "image": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80",
+        "status": "Nuevo",
+        "rating": 4,
+        "reviews": 18,
+        "power": "646 CV",
+        "engine": "Electrico",
+        "description": "Gran turismo electrico con aceleracion inmediata, interior premium y autonomia ideal para trayectos urbanos y carretera."
     },
 
     {
@@ -40,7 +58,13 @@
         "price": 158200,
         "type": "Coupe",
         "fuel": "Gasolina",
-        "image": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80"
+        "image": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80",
+        "status": "Certificado",
+        "rating": 5,
+        "reviews": 31,
+        "power": "630 CV",
+        "engine": "4.0L V8",
+        "description": "Coupe de lujo con motor V8, alto nivel de confort y desempeno deportivo para usuarios que buscan potencia y exclusividad."
     },
     {
         "id": 5,
@@ -50,7 +74,13 @@
         "price": 250000,
         "type": "Convertible",
         "fuel": "Gasolina",
-        "image": "https://images.unsplash.com/photo-1617814076668-1a56c957e74a?auto=format&fit=crop&w=900&q=80"
+        "image": "https://images.unsplash.com/photo-1617814076668-1a56c957e74a?auto=format&fit=crop&w=900&q=80",
+        "status": "Nuevo",
+        "rating": 5,
+        "reviews": 27,
+        "power": "621 CV",
+        "engine": "3.0L V6",
+        "description": "Convertible premium con diseno italiano, gran potencia y sensacion de manejo abierta para una experiencia mas emocionante."
     },
     {
         "id": 6,
@@ -60,6 +90,12 @@
         "price": 120000,
         "type": "SUV",
         "fuel": "Hibrido",
-        "image": "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=900&q=80"
+        "image": "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=900&q=80",
+        "status": "Disponible",
+        "rating": 4,
+        "reviews": 36,
+        "power": "523 CV",
+        "engine": "Hibrido",
+        "description": "SUV premium con gran comodidad, tecnologia hibrida y capacidad para viajes largos con lujo, espacio y seguridad."
     }
 ]

@@ -10,7 +10,13 @@ export class CarFactory {
             carData.price,
             carData.type,
             carData.fuel,
-            carData.image
+            carData.image,
+            carData.status,
+            carData.rating,
+            carData.reviews,
+            carData.power,
+            carData.engine,
+            carData.description
         );
     }
 }

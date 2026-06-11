@@ -8,7 +8,13 @@ export class CarAdapter {
             price: rawCar.price,
             type: rawCar.type,
             fuel: rawCar.fuel,
-            image: rawCar.image
+            image: rawCar.image,
+            status: rawCar.status,
+            rating: rawCar.rating,
+            reviews: rawCar.reviews,
+            power: rawCar.power,
+            engine: rawCar.engine,
+            description: rawCar.description
         };
     }
 }

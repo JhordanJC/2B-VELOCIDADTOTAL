@@ -22,6 +22,19 @@ export function catalogView() {
     </div>
     <p id="carCounter"></p>
 
+    <aside class="cart-panel">
+        <div class="cart-header">
+            <div>
+                <span class="detail-label">Carrito</span>
+                <h3>Vehiculos seleccionados</h3>
+            </div>
+            <button id="clearCartButton" type="button">Vaciar</button>
+        </div>
+
+        <div id="cartItems" class="cart-items"></div>
+        <p id="cartTotal" class="cart-total"></p>
+    </aside>
+
     <div id="detailPanel" class="detail-panel hidden"></div>
 
     <div id="carsContainer" class="cars-grid"></div>
@@ -41,6 +54,7 @@ export async function initCatalogView() {
 
         const savedState = store.getState();
         searchInput.value = savedState.searchText;
+        renderCart();
 
         let currentCars = cars;
 
@@ -53,6 +67,14 @@ export async function initCatalogView() {
         }
 
         renderCars(currentCars);
+
+        const clearCartButton = document.getElementById("clearCartButton");
+
+        clearCartButton.addEventListener("click", function() {
+            store.clearCart();
+            observer.notify("cartChanged", store.getState().cart);
+            renderCart();
+        });
 
         searchInput.addEventListener("input", function () {
         store.setSearchText(searchInput.value);
@@ -76,6 +98,10 @@ export async function initCatalogView() {
 
         observer.subscribe("sortChanged", function (sortBy) {
         console.log("Orden aplicado:", sortBy);
+        });
+
+        observer.subscribe("cartChanged", function (cart) {
+        console.log("Carrito actualizado:", cart.length);
         });
 
     } catch (error) {
@@ -129,6 +155,7 @@ function renderCars(carList) {
 
                 <div class="card-actions">
                     <button type="button" class="detail-button" data-id="${car.id}">Ver detalle</button>
+                    <button type="button" class="cart-button" data-id="${car.id}">Agregar al carrito</button>
                 </div>
             </div>
         </article>
@@ -145,6 +172,25 @@ function renderCars(carList) {
             });
 
             showCarDetail(selectedCar);
+        });
+    });
+
+    const cartButtons = document.querySelectorAll(".cart-button");
+
+    cartButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            const carId = Number(button.dataset.id);
+            const selectedCar = cars.find(function(car) {
+                return car.id === carId;
+            });
+
+            if (!selectedCar) {
+                return;
+            }
+
+            store.addCartItem(selectedCar);
+            observer.notify("cartChanged", store.getState().cart);
+            renderCart();
         });
     });
 }
@@ -171,4 +217,51 @@ function showCarDetail(car) {
             <li><strong>Precio:</strong> $${car.price.toLocaleString()}</li>
         </ul>
     `;
+}
+
+function renderCart() {
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const cart = store.getState().cart;
+
+    if (!cartItems || !cartTotal) {
+        return;
+    }
+
+    if (cart.length === 0) {
+        cartItems.innerHTML = `<p class="empty-cart">No hay vehiculos agregados.</p>`;
+        cartTotal.textContent = "Total: $0";
+        return;
+    }
+
+    cartItems.innerHTML = cart.map(function(item) {
+        return `
+            <article class="cart-item">
+                <img src="${item.image}" alt="${item.brand} ${item.model}">
+                <div>
+                    <h4>${item.brand} ${item.model}</h4>
+                    <p>$${item.price.toLocaleString()}</p>
+                </div>
+                <button type="button" class="remove-cart-button" data-id="${item.id}">Quitar</button>
+            </article>
+        `;
+    }).join("");
+
+    const total = cart.reduce(function(sum, item) {
+        return sum + item.price;
+    }, 0);
+
+    cartTotal.textContent = `Total: $${total.toLocaleString()}`;
+
+    const removeButtons = document.querySelectorAll(".remove-cart-button");
+
+    removeButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            const carId = Number(button.dataset.id);
+
+            store.removeCartItem(carId);
+            observer.notify("cartChanged", store.getState().cart);
+            renderCart();
+        });
+    });
 }
